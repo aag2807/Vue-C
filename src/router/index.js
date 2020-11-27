@@ -16,9 +16,10 @@ Vue.use(VueRouter)
 
 export default function (/* { store, ssrContext } */) {
   const Router = new VueRouter({
+    mode: 'history',
     scrollBehavior: () => ({ x: 0, y: 0 }),
     routes,
-    mode:'history',
+
 
     // Leave these as they are and change in quasar.conf.js instead!
     // quasar.conf.js -> build -> vueRouterMode

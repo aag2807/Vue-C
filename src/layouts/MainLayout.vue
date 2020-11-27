@@ -2,6 +2,16 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
+
+
+        <q-btn
+          v-if="$route.fullPath.includes('/chat')"
+          flat
+          dense
+          v-go-back.single
+          icon='arrow_back'
+          label='back'/>
+
         <q-toolbar-title class="absolute-center">
            {{ title }}
         </q-toolbar-title>
