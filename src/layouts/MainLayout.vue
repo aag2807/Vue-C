@@ -3,7 +3,6 @@
     <q-header elevated>
       <q-toolbar>
 
-
         <q-btn
           v-if="$route.fullPath.includes('/chat')"
           flat
@@ -15,6 +14,16 @@
         <q-toolbar-title class="absolute-center">
            {{ title }}
         </q-toolbar-title>
+
+        <q-btn
+          to='/auth'
+          flat
+          dense
+          icon='account_circle'
+          no-caps
+          class="absolute-right q-pr-sm"
+          label='Login'/>
+
       </q-toolbar>
     </q-header>
     <q-page-container>
@@ -33,7 +42,6 @@ export default {
   components: { EssentialLink },
   computed:{
     title(){
-      console.log()
       let currentPath = this.$route.fullPath;
       if (currentPath == '/') return 'Vue-c'
       else if (currentPath == '/chat') return 'Chat'

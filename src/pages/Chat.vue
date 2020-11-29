@@ -1,28 +1,40 @@
 <template>
   <q-page class="flex column">
-    <h5>Chat page</h5>
+    <q-banner class="bg-grey-4 text-center">
+    User is Offline
+    </q-banner>
+    <div class="q-pa-md column col justify-end">
+      <q-chat-message
+        v-for="(msg, index) in messages"
+        :key="index"
+        :name="msg.from"
+        :text="[msg.text]"
+        :sent="msg.from === 'me' ? true : false"
+      />
+    </div>
     <q-footer elevated>
       <q-toolbar>
-        <q-toolbar-title>
-          <q-input
-            bg-color="white"
-            rounded
-            outlined
-            v-model="newMessage"
-            class="full-width"
-            label="Message"
-            dense
-          >
-            <template v-slot:after>
-              <q-btn
-                round
-                dense
-                flat
-                color="white"
-                icon="send" />
-            </template>
-          </q-input>
-        </q-toolbar-title>
+        <q-input
+          bg-color="white"
+          rounded
+          outlined
+          v-model="newMessage"
+          class="full-width"
+          label="Message"
+          dense
+        >
+          <template v-slot:after>
+            <q-btn
+              type="submit"
+              @click="sendMessage"
+              round
+              dense
+              flat
+              color="white"
+              icon="send"
+            />
+          </template>
+        </q-input>
       </q-toolbar>
     </q-footer>
   </q-page>
@@ -30,9 +42,32 @@
 
 <script>
 export default {
-  data(){
+  data() {
     return {
-      newMessage: ''
+      newMessage: "",
+      messages: [
+        {
+          text: "hi",
+          from: "them"
+        },
+        {
+          text: "hello!",
+          from: "me"
+        },
+        {
+          text: "how are you ?",
+          from: "them"
+        }
+      ]
+    };
+  },
+  methods: {
+    sendMessage() {
+      this.messages.push({
+        text: this.newMessage,
+        from: "me"
+      });
+      this.newMessage = "";
     }
   }
 };
