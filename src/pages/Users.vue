@@ -2,14 +2,15 @@
   <q-page class="flex q-pa-md">
     <q-list class="full-width" separator>
       <q-item
-        v-for="user in contacts"
+        v-for="(user, i) in users"
         to="/chat"
-        :key="user.id"
+        :key="i"
         clickable
-        v-ripple>
+        v-ripple
+      >
         <q-item-section avatar>
           <q-avatar color="primary" text-color="white">
-            {{ user.name.charAt(0) }}
+            {{ user.name[0]}}
           </q-avatar>
         </q-item-section>
 
@@ -18,7 +19,7 @@
         </q-item-section>
 
         <q-item-section side>
-          <q-badge :color="user.online ? 'cyan-9' : 'red-4' ">
+          <q-badge :color="user.online ? 'cyan-9' : 'red-4'">
             {{ user.online ? "Online" : "Offline" }}
           </q-badge>
         </q-item-section>
@@ -28,27 +29,10 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
-  data() {
-    return {
-      contacts: [
-        {
-          id: 1,
-          name: "Diana Medina",
-          online: true
-        },
-        {
-          id: 2,
-          name: "Alvaro Guzman",
-          online: false
-        },
-        {
-          id: 4,
-          name: "Evan You",
-          online: true
-        }
-      ]
-    };
+  computed: {
+    ...mapGetters("store", ["users"])
   }
 };
 </script>

@@ -31,6 +31,7 @@
 <script>
 import LoginRegister from "../components/LoginRegister";
 
+
 export default {
   components: {
     LoginRegister

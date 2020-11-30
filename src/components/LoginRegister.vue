@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: "LoginRegister",
   props: ["tab"],
@@ -37,17 +38,21 @@ export default {
     return {
       formData: {
         name: "",
-        email: "",
-        password: ""
+        email: "aagn2807@gmail.com",
+        password: "asdasd1"
       }
     };
   },
   methods: {
+    ...mapActions('store', [
+      'registerUser',
+      'loginUser'
+    ]),
     submitForm() {
       if (this.tab === 'login'){
-        console.log('login user')
+        this.loginUser(this.formData)
       } else {
-        console.log('register user')
+        this.registerUser(this.formData)
       }
     }
   },

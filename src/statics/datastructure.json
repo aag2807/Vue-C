@@ -1,0 +1,45 @@
+{
+  "users": {
+    "USERID1":{
+      "name": "Alvaro",
+      "email": "test1@gmail.com",
+      "online": true
+    },
+    "USERID2":{
+      "name": "Diana",
+      "email": "test2@gmail.com",
+      "online": true
+    },
+    "USERID3":{
+      "name": "Evan You",
+      "email": "youEvan@vuemail.com",
+      "online": false
+    }
+  },
+  "chats":{
+    "USERID1":{
+      "USERID2":{
+        "MESSAGEID1": {
+          "text":"Te Amo",
+          "from": "them"
+        },
+        "MESSAGEID2": {
+          "text":"Te Amo mas",
+          "from": "me"
+        }
+      }
+    },
+    "USERID2":{
+      "USERID1":{
+        "MESSAGEID1": {
+          "text":"Te Amo",
+          "from": "me"
+        },
+        "MESSAGEID2": {
+          "text":"Te Amo mas",
+          "from": "them"
+        }
+      }
+    }
+  }
+}
