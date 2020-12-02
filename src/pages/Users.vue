@@ -2,9 +2,9 @@
   <q-page class="flex q-pa-md">
     <q-list class="full-width" separator>
       <q-item
-        v-for="(user, i) in users"
-        to="/chat"
-        :key="i"
+        v-for="(user, index) in users"
+        :key="index"
+        :to="'/chat/' + index"
         clickable
         v-ripple
       >

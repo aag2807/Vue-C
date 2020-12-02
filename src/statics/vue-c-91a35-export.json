@@ -1,0 +1,45 @@
+{
+  "chats" : {
+    "nWIFcIdrs8M5MAqBngmQf35K8ga2" : {
+      "l10VWarENLYNurOl9xuqccGgnvl2" : {
+        "MESSAGEID1" : {
+          "from" : "them",
+          "text" : "Te Amo"
+        },
+        "MESSAGEID2" : {
+          "from" : "me",
+          "text" : "Te Amo mas"
+        }
+      }
+    },
+    "l10VWarENLYNurOl9xuqccGgnvl2" : {
+      "nWIFcIdrs8M5MAqBngmQf35K8ga2" : {
+        "MESSAGEID1" : {
+          "from" : "me",
+          "text" : "Te Amo"
+        },
+        "MESSAGEID2" : {
+          "from" : "them",
+          "text" : "Te Amo mas"
+        }
+      }
+    }
+  },
+  "users" : {
+    "58JInZdEwndkdHCHOZzPRES2rpH3" : {
+      "email" : "evanYou2@vuemail.com",
+      "name" : "Evan You",
+      "online" : false
+    },
+    "l10VWarENLYNurOl9xuqccGgnvl2" : {
+      "email" : "dianamedinaaponte@gmail.com",
+      "name" : "Diana Medina",
+      "online" : false
+    },
+    "nWIFcIdrs8M5MAqBngmQf35K8ga2" : {
+      "email" : "aagn2807@gmail.com",
+      "name" : "Alvaro Guzman",
+      "online" : true
+    }
+  }
+}

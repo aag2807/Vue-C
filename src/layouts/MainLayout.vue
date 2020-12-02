@@ -55,6 +55,9 @@ export default {
     ...mapState('store', [
       'userDetails'
     ]),
+    created () {
+      console.log(this.$route.params);
+    },
     title(){
       let currentPath = this.$route.fullPath;
       if (currentPath == '/') return 'Vue-c'
@@ -72,6 +75,4 @@ export default {
   .q-toolbar
     .q-btn
       line-height: 1.2
-
-
 </style>
