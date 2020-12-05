@@ -1,6 +1,6 @@
 # Quasar App (vue-c)
 
-A Quasar Framework app
+A Quasar Framework app <br>
 a whatsapp inspired app with electron elements included
 
 
