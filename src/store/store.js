@@ -27,9 +27,9 @@ const mutations = {
   addMessage(state, payload) {
     vue.set(state.messages, payload.messageId, payload.messageDetails);
   },
-  clearMessages(state){
+  clearMessages(state) {
     let { messages } = state;
-    messages = {}
+    messages = {};
   }
 };
 
@@ -127,22 +127,33 @@ const actions = {
   },
   firebaseGetMessage({ state, commit }, payload) {
     let userId = state.userDetails.userId;
-    messagesRef = firebaseDB.ref("chats/" + userId + "/" + payload)
+    messagesRef = firebaseDB.ref("chats/" + userId + "/" + payload);
     messagesRef.on("child_added", snap => {
-        let messageDetails = snap.val();
-        let messageId = snap.key;
-        console.log(messageDetails, messageId)
-        commit("addMessage", {
-          messageDetails,
-          messageId
-        });
+      let messageDetails = snap.val();
+      let messageId = snap.key;
+      console.log(messageDetails, messageId);
+      commit("addMessage", {
+        messageDetails,
+        messageId
       });
+    });
   },
-  firebaseStopGettingMessages({ commit }){
-    if (messagesRef){
-      messagesRef.off('child_added')
-      commit('clearMessages')
+  firebaseStopGettingMessages({ commit }) {
+    if (messagesRef) {
+      messagesRef.off("child_added");
+      commit("clearMessages");
     }
+  },
+  firebaseSendMessage({ commit }, payload) {
+    console.log(payload);
+    firebaseDB
+      .ref("chats/" + state.userDetails.userId + "/" + payload.otherUserID)
+      .push(payload.message);
+
+    payload.message.from = "them";
+    firebaseDB
+      .ref("chats/" + payload.otherUserID + "/" + state.userDetails.userId)
+      .push(payload.message);
   }
 };
 

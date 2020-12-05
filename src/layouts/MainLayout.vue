@@ -2,39 +2,41 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-
         <q-btn
           v-if="$route.fullPath.includes('/chat')"
           flat
           dense
           v-go-back.single
-          icon='arrow_back'
-          label='back'/>
+          icon="arrow_back"
+          label="back"
+        />
 
         <q-toolbar-title class="absolute-center">
-           {{ title }}
+          {{ title }}
         </q-toolbar-title>
 
         <q-btn
           v-if="!userDetails.userId"
-          to='/auth'
+          to="/auth"
           flat
           dense
-          icon='account_circle'
+          icon="account_circle"
           no-caps
           class="absolute-right q-pr-sm"
-          label='Login'/>
+          label="Login"
+        />
 
-          <q-btn
+        <q-btn
           v-else
           flat
           dense
           @click="logoutUser"
-          icon='account_circle'
+          icon="account_circle"
           no-caps
-          class='absolute-right q-pr-sm'
-          >Log Out <br> {{userDetails.name}}</q-btn>
-
+          class="absolute-right q-pr-sm"
+          >Log Out <br />
+          {{ userDetails.name }}</q-btn
+        >
       </q-toolbar>
     </q-header>
     <q-page-container>
@@ -44,35 +46,34 @@
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink.vue'
-import { mapState, mapActions } from 'vuex';
-
+import EssentialLink from "components/EssentialLink.vue";
+import { mapState, mapActions } from "vuex";
+import MixinUser from "../mixin/Mixin-user";
 
 export default {
-  name: 'MainLayout',
+  name: "MainLayout",
+  mixins: [MixinUser],
   components: { EssentialLink },
-  computed:{
-    ...mapState('store', [
-      'userDetails'
-    ]),
-    created () {
+  computed: {
+    ...mapState("store", ["userDetails"]),
+    created() {
       console.log(this.$route.params);
     },
-    title(){
+    title() {
       let currentPath = this.$route.fullPath;
-      if (currentPath == '/') return 'Vue-c'
-      else if (currentPath == '/chat') return 'Chat'
-      else if (currentPath == '/auth') return 'Login'
+      if (currentPath == "/") return "Vue-c";
+      else if (currentPath.includes("/chat")) return this.otherUserDetaills.name;
+      else if (currentPath == "/auth") return "Login";
     }
   },
   methods: {
-    ...mapActions('store', ['logoutUser'])
-},
-}
+    ...mapActions("store", ["logoutUser"])
+  }
+};
 </script>
 
 <style lang="stylus">
-  .q-toolbar
-    .q-btn
-      line-height: 1.2
+.q-toolbar
+  .q-btn
+    line-height: 1.2
 </style>
