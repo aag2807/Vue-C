@@ -9,7 +9,7 @@ a whatsapp inspired app with electron elements included
 ```React.js
 Make sure to
 create your own firebase config and save it in the components folder.
-Then just 'npm start' and take a look in port :3000
+Then just 'npm start' and take a look in port :8080
 ```
 
 ## Contributing
