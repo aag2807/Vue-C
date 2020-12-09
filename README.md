@@ -15,7 +15,6 @@ Then just 'npm start' and take a look in port :8080
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-<a href="https://vue-c-91a35.web.app/">hosted here</a>
 
 ## Install the dependencies
 ```bash
