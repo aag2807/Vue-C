@@ -5,7 +5,7 @@ import vue from "vue";
 const state = {
   userDetails: {},
   users: {},
-  messages: {}
+  messages: {},
 };
 
 let messagesRef;
@@ -30,26 +30,26 @@ const mutations = {
   clearMessages(state) {
     let { messages } = state;
     messages = {};
-  }
+  },
 };
 
 const actions = {
   registerUser({}, payload) {
     firebaseAuth
       .createUserWithEmailAndPassword(payload.email, payload.password)
-      .then(res => {
+      .then((res) => {
         let userId = firebaseAuth.currentUser.uid;
         firebaseDB.ref(`users/${userId}`).set({
           name: payload.name,
           email: payload.email,
-          online: true
+          online: true,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         Notify.create({
           message: err.message,
           caption: "Error Ocurred",
-          color: "negative"
+          color: "negative",
         });
         console.log(err.message);
       });
@@ -57,14 +57,14 @@ const actions = {
   loginUser({}, payload) {
     firebaseAuth
       .signInWithEmailAndPassword(payload.email, payload.password)
-      .then(res => {
+      .then((res) => {
         console.log(res);
       })
-      .catch(err => {
+      .catch((err) => {
         Notify.create({
           message: err.message,
           caption: "Error Ocurred",
-          color: "negative"
+          color: "negative",
         });
         console.log(err.message);
       });
@@ -73,22 +73,22 @@ const actions = {
     firebaseAuth.signOut();
   },
   handleAuthStateChanged({ commit, dispatch, state }, payload) {
-    firebaseAuth.onAuthStateChanged(user => {
+    firebaseAuth.onAuthStateChanged((user) => {
       if (user) {
         let userId = firebaseAuth.currentUser.uid;
-        firebaseDB.ref(`users/${userId}`).once("value", snap => {
+        firebaseDB.ref(`users/${userId}`).once("value", (snap) => {
           let userDetails = snap.val();
           commit("setUserDetail", {
             name: userDetails.name,
             email: userDetails.email,
-            userId: userId
+            userId: userId,
           });
         });
         dispatch("firebaseUpdateUser", {
           userId: userId,
           updates: {
-            online: true
-          }
+            online: true,
+          },
         });
         dispatch("firebaseGetUsers");
         this.$router.push("/");
@@ -96,8 +96,8 @@ const actions = {
         dispatch("firebaseUpdateUser", {
           userId: state.userDetails.userId,
           updates: {
-            online: false
-          }
+            online: false,
+          },
         });
         commit("setUserDetail", {});
         this.$router.push("/auth");
@@ -105,20 +105,20 @@ const actions = {
     });
   },
   firebaseGetUsers({ commit }) {
-    firebaseDB.ref("users").on("child_added", snap => {
+    firebaseDB.ref("users").on("child_added", (snap) => {
       let userDetails = snap.val();
       let userId = snap.key;
       commit("addUser", {
         userId,
-        userDetails
+        userDetails,
       });
     });
-    firebaseDB.ref("users").on("child_changed", snap => {
+    firebaseDB.ref("users").on("child_changed", (snap) => {
       let userDetails = snap.val();
       let userId = snap.key;
       commit("updateUser", {
         userId,
-        userDetails
+        userDetails,
       });
     });
   },
@@ -128,13 +128,13 @@ const actions = {
   firebaseGetMessage({ state, commit }, payload) {
     let userId = state.userDetails.userId;
     messagesRef = firebaseDB.ref("chats/" + userId + "/" + payload);
-    messagesRef.on("child_added", snap => {
+    messagesRef.on("child_added", (snap) => {
       let messageDetails = snap.val();
       let messageId = snap.key;
       console.log(messageDetails, messageId);
       commit("addMessage", {
         messageDetails,
-        messageId
+        messageId,
       });
     });
   },
@@ -154,19 +154,19 @@ const actions = {
     firebaseDB
       .ref("chats/" + payload.otherUserID + "/" + state.userDetails.userId)
       .push(payload.message);
-  }
+  },
 };
 
 const getters = {
-  users: state => {
+  users: (state) => {
     let filteredUsers = {};
-    Object.keys(state.users).forEach(user => {
+    Object.keys(state.users).forEach((user) => {
       if (user !== state.userDetails.userId) {
         filteredUsers[user] = state.users[user];
       }
     });
     return filteredUsers;
-  }
+  },
 };
 
 export default {
@@ -174,5 +174,5 @@ export default {
   state,
   mutations,
   actions,
-  getters
+  getters,
 };

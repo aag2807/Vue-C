@@ -1,6 +1,9 @@
 <template>
   <q-page ref="pageChat" class="flex column pageChat">
-    <q-banner v-if="!otherUserDetaills.online" class="bg-grey-4 text-center fixed-top">
+    <q-banner
+      v-if="!otherUserDetaills.online"
+      class="bg-grey-4 text-center fixed-top"
+    >
       {{ otherUserDetaills.name }} is Offline
     </q-banner>
     <div
@@ -52,26 +55,26 @@ export default {
   data() {
     return {
       newMessage: "",
-      showMessages: false
+      showMessages: false,
     };
   },
   mixins: [MixinUser],
   computed: {
-    ...mapState("store", ["messages", "userDetails"])
+    ...mapState("store", ["messages", "userDetails"]),
   },
   methods: {
     ...mapActions("store", [
       "firebaseGetMessage",
       "firebaseStopGettingMessages",
-      "firebaseSendMessage"
+      "firebaseSendMessage",
     ]),
     sendMessage() {
       this.firebaseSendMessage({
         message: {
           text: this.newMessage,
-          from: "me"
+          from: "me",
         },
-        otherUserID: this.$route.params.otherUserID
+        otherUserID: this.$route.params.otherUserID,
       });
       this.newMessage = "";
     },
@@ -80,7 +83,7 @@ export default {
       setTimeout(() => {
         window.scrollTo(0, pageChat.scrollHeight);
       }, 20);
-    }
+    },
   },
   watch: {
     messages(val) {
@@ -90,14 +93,14 @@ export default {
           this.showMessages = true;
         }, 200);
       }
-    }
+    },
   },
   mounted() {
     this.firebaseGetMessage(this.$route.params.otherUserID);
   },
   destroyed() {
     this.firebaseStopGettingMessages();
-  }
+  },
 };
 </script>
 

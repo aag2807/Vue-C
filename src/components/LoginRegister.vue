@@ -21,16 +21,16 @@
       label="Password"
       type="password"
     />
-  <div class="row">
-    <q-space />
-    <q-btn type="submit" color="primary" :label="tab" />
-    <q-space />
-  </div>
+    <div class="row">
+      <q-space />
+      <q-btn type="submit" color="primary" :label="tab" />
+      <q-space />
+    </div>
   </q-form>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from "vuex";
 export default {
   name: "LoginRegister",
   props: ["tab"],
@@ -39,22 +39,19 @@ export default {
       formData: {
         name: "",
         email: "aagn2807@gmail.com",
-        password: "asdasd1"
-      }
+        password: "asdasd1",
+      },
     };
   },
   methods: {
-    ...mapActions('store', [
-      'registerUser',
-      'loginUser'
-    ]),
+    ...mapActions("store", ["registerUser", "loginUser"]),
     submitForm() {
-      if (this.tab === 'login'){
-        this.loginUser(this.formData)
+      if (this.tab === "login") {
+        this.loginUser(this.formData);
       } else {
-        this.registerUser(this.formData)
+        this.registerUser(this.formData);
       }
-    }
+    },
   },
 };
 </script>

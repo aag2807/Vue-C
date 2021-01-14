@@ -31,15 +31,14 @@
 <script>
 import LoginRegister from "../components/LoginRegister";
 
-
 export default {
   components: {
-    LoginRegister
+    LoginRegister,
   },
   data() {
     return {
-      tab: "login"
+      tab: "login",
     };
-  }
+  },
 };
 </script>
